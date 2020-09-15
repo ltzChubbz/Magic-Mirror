@@ -1,0 +1,175 @@
+/* Magic Mirror Config Sample
+ *
+ * By Michael Teeuw http://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information how you can configurate this file
+ * See https://github.com/MichMich/MagicMirror#configuration
+ *
+ */
+
+var config = {
+//	address: "localhost", // Address to listen on, can be:
+	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+	                      // - another specific IPv4/6 to listen on a specific interface
+	                      // - "", "0.0.0.0", "::" to listen on any interface
+	                      // Default, when address config is left out, is "localhost"
+	port: 8080,
+	ipWhitelist: [],//"192.168.0.0/99"],// "127.0.0.1", "::ffff:127.0.0.1", "::1"], // Set [] to allow all IP addresses
+	                                                       // or add a specific IPv4 of 192.168.1.5 :
+	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+	                                                       // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	address: "0.0.0.0",
+	language: "en",
+	timeFormat: 24,
+	units: "metric",
+
+	modules: [
+		{
+			module: "alert",
+		},
+		{
+			module: 'MMM-PIR-Sensor',
+			config: {
+				powerSavingDelay: "60",
+				invertSensorValue: "true"
+			}
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		{
+			module: "clock",
+			position: "top_left",
+			config: {
+				timezone: "Australia/Melbourne"
+				}
+		},
+		{
+			module: "MMM-MyCalendar",
+			position: "top_left",	// This can be any of the regions. Best results in left or right regions.
+			config: {
+				colored: false,
+				calendars: [
+					{
+					url: 'https://calendar.google.com/calendar/ical/v2pkoq4mo86jthfkn0nthoq108%40group.calendar.google.com/public/basic.ics',
+					symbol: 'calendar',
+						auth: {
+						    user: 'username',
+						    pass: 'superstrongpassword',
+						    method: 'basic'
+						}
+					},
+				],
+				maximumEntries: "6",
+				maxTitleLength: "35"
+			}
+		},
+		{
+			module: "compliments",
+			position: "lower_third"
+		},
+		{
+			module: "currentweather",
+			position: "top_right",
+			config: {
+				location: "Geelong",
+				locationID: "2165798",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "9217abd3ea870ae26f415ba9cf539b1e",
+				useBeaufort: "false"
+			}
+		},
+		{
+			module: "weatherforecast",
+			position: "top_right",
+			header: "Weather Forecast",
+			config: {
+				location: "Geelong",
+				locationID: "2165798",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "9217abd3ea870ae26f415ba9cf539b1e"
+			}
+		},
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			config: {
+				feeds: [
+					{
+						title: "ABC Australia",
+						url: "http://www.abc.net.au/news/feed/54242/rss.xml"
+					}
+				],
+				showSourceTitle: true,
+				showPublishDate: true
+			}
+		},
+		 {
+                        module: "newsfeed",
+                        position: "bottom_bar",
+                        config: {
+                                feeds: [
+                                        {
+                                                title: "ABC World",
+                                                url: "http://www.abc.net.au/news/feed/52278/rss.xml"
+                                        }
+                                ],
+                                showSourceTitle: true,
+                                showPublishDate: true
+                        }
+                },
+		{
+			module: 'MMM-Globe',
+			position: 'lower_third',	// This can be any of the regions. Best results in lower_third
+			config: {
+               	   	   	 size:"large", // Globe size. See configuration options below for more options
+              			 locations: [
+					{lat:-38.147110,lng:144.360687, label: "Home"},
+					{lat:49.817492,lng:15.472962, label: "Czech Republic"},
+					{lat:51.165691,lng:10.451526, label: "Germany"},
+					{lat:47.516231,lng:14.550072, label: "Austria"},
+					{lat:47.162494,lng:19.503304, label: "Hungary"},
+					{lat:46.151241,lng:14.995463, label: "Slovenia"},
+					{lat:45.815399,lng:15.966568, label: "Croatia"},
+					{lat:43.915886,lng:17.679076, label: "Bosnia and Herzegovina"},
+					{lat:42.708678,lng:19.374390, label: "Montenegro"},
+					{lat:41.153332,lng:20.168331, label: "Albania"},
+					{lat:39.074208,lng:21.824312, label: "Greece"},
+					{lat:52.132633,lng:5.2912660, label: "Netherlands"},
+					{lat:50.503887,lng:4.4699360, label: "Belgium"},
+					{lat:55.378051,lng:-3.435973, label: "United Kingdom"},
+					{lat:53.412910,lng:-8.243890, label: "Ireland"},
+					{lat:46.227638,lng:2.2137490, label: "France"},
+					{lat:40.463667,lng:-3.749220, label: "Spain"},
+					{lat:39.399872,lng:-8.224454, label: "Portugal"},
+					{lat:41.871940,lng:12.567380, label: "Italy"},
+ 					{lat:46.818188,lng:8.2275120, label: "Switzerland"},
+ 					{lat:37.090240,lng:-95.712891, label: "United States"},
+					{lat:56.130366,lng:-106.346771, label: "Canada"},
+					{lat:14.058324,lng:108.277199, label: "Vietnam"},
+					{lat:12.565679,lng:104.990963, label: "Cambodia"},
+ 					{lat:1.3520830,lng:103.819836, label: "Singapore"},
+ 					{lat:15.870032,lng:100.992541, label: "Thailand"},
+					{lat:4.2104840,lng:101.975766, label: "Malaysia"},
+					{lat:22.396428,lng:114.109497, label: "Hong Kong"},
+ 					{lat:35.861660,lng:104.195397, label: "China"},
+					{lat:35.907757,lng:127.766922, label: "South Korea"},
+ 					{lat:36.204824,lng:138.252924, label: "Japan"}
+				]
+			}
+		},
+	 	{
+                        module: 'MMM-Remote-Control',
+                        // uncomment the following line to show the URL of the remote control on the mirror
+                        position: 'bottom_bar'
+                        // you can hide this module afterwards from the remote control itself
+                },
+
+	]
+
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}
